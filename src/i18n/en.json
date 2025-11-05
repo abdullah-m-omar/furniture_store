@@ -21,9 +21,10 @@
     "profile": "Profile",
     "orders": "Orders"
   },
-  "common": { "language": "Language", "en": "English", "ar": "Arabic" },
-  "product": { "viewDetails": "View Details", "addToCart": "Add to Cart" },
-    "home": {
+  "common": {
+    "language": "Language", "en": "English", "ar": "Arabic"
+  },
+  "home": {
     "hero": {
       "aria": "Featured promotions",
       "1": { "title": "Modern comfort for every room", "sub": "Handpicked sofas, tables, and storage." },
@@ -55,6 +56,107 @@
         "2": { "name": "Mohammed K.", "text": "Sturdy dining table, easy assembly, looks premium." },
         "3": { "name": "Lina R.", "text": "Loved the minimalist bed frame—comfortable and elegant." }
       }
+    }
+  },
+   "categories": {
+    "living": "Living Room",
+    "bedroom": "Bedroom",
+    "dining": "Dining"
+  },
+  "products": {
+    "title": "All Products",
+    "allCategories": "All categories",
+    "filterByCategory": "Filter by category",
+    "searchPlaceholder": "Search products...",
+    "sort": {
+      "newest": "Newest",
+      "priceAsc": "Price: Low to High",
+      "priceDesc": "Price: High to Low"
+    },
+    "noResults": "No products matched your filters."
+  },
+  "product": {
+    "view": "View",
+    "add": "Add",
+    "addToCart": "Add to Cart",
+    "quantity": "Quantity",
+    "shippingNote": "Ships within 2–5 days. Free returns for 30 days.",
+    "tabs": {
+      "details": "Details",
+      "specs": "Specifications",
+      "reviews": "Reviews"
+    },
+    "specs": {
+      "material": "Material",
+      "dimensions": "Dimensions",
+      "color": "Color",
+      "sample": {
+        "material": "Solid wood, fabric",
+        "dimensions": "200 × 90 × 75 cm",
+        "color": "Walnut / Beige"
+      }
+    },
+    "reviews": {
+      "placeholder": "Reviews will appear here after purchase flow."
+    },
+    "notFound": "Product not found.",
+    "backToProducts": "Back to Products",
+    "back": "Back"
+  },
+   "about": {
+    "title": "About Us",
+    "intro": "We are a home furniture brand focused on quality materials, timeless design, and fair prices.",
+    "missionTitle": "Our Mission",
+    "mission": "Create beautiful, long-lasting furniture that makes every home feel welcoming.",
+    "valuesTitle": "Our Values",
+    "values": {
+      "quality": "Quality craftsmanship",
+      "sustainability": "Responsible sourcing",
+      "service": "Friendly support"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "sub": "Questions, requests, or feedback—send us a message and we’ll get back to you.",
+    "name": "Full Name",
+    "namePh": "Your name",
+    "email": "Email",
+    "message": "Message",
+    "messagePh": "How can we help?",
+    "send": "Send",
+    "alert": "Thanks! This is a demo—form submission not wired yet.",
+    "infoTitle": "Store Information",
+    "address": "Address: Riyadh, Saudi Arabia",
+    "phone": "Phone: +966 5 555 5555",
+    "hours": "Hours: Sat–Thu, 9:00–18:00"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "sub": "Find quick answers to common questions.",
+    "items": [
+      { "q": "How long does delivery take?", "a": "Typically 2–5 business days within KSA." },
+      { "q": "Can I return an item?", "a": "Yes, free returns within 30 days in original condition." },
+      { "q": "Do you offer assembly?", "a": "Yes, available in select cities for an extra fee." }
+    ]
+  },
+  "terms": {
+    "title": "Terms & Conditions",
+    "updated": "Last updated: 01 Nov 2025",
+    "sections": {
+      "usage": { "title": "Use of Website", "text": "You agree to use this site in compliance with applicable laws and our policies." },
+      "orders": { "title": "Orders & Payment", "text": "Orders are subject to availability. Prices are shown in your selected currency. Payments are processed securely." },
+      "returns": { "title": "Returns", "text": "Items can be returned within 30 days; some exclusions may apply." },
+      "liability": { "title": "Liability", "text": "We are not liable for indirect or incidental damages to the maximum extent permitted by law." }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "updated": "Last updated: 01 Nov 2025",
+    "sections": {
+      "collection": { "title": "Information We Collect", "text": "We may collect contact details, order info, and usage data to provide our services." },
+      "usage": { "title": "How We Use Information", "text": "To process orders, improve our website, and communicate with you about updates or offers." },
+      "sharing": { "title": "Sharing", "text": "We do not sell your data. We may share with trusted providers (e.g., payment, delivery) strictly for service delivery." },
+      "rights": { "title": "Your Rights", "text": "You can request access, correction, or deletion of your personal data where applicable." }
     }
   }
 }

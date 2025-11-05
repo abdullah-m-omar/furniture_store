@@ -5,16 +5,16 @@ import Footer from './components/layout/Footer';
 
 // // Import Page Components
 import HomePage from './pages/HomePage';
-// // import AboutPage from './pages/AboutPage';
-// // import ContactPage from './pages/ContactPage';
-// // import FaqPage from './pages/FaqPage';
-// // import TermsPage from './pages/TermsPage';
-// // import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import FaqPage from './pages/FAQPage';
+import TermsPage from './pages/TermsPage';
+import PrivacyPolicyPage from './pages/PrivacyPage';
 // // import LoginPage from './pages/LoginPage';
 // // import RegisterPage from './pages/RegisterPage';
 // // import ForgotPasswordPage from './pages/ForgotPasswordPage';
-// // import ProductsPage from './pages/ProductsPage';
-// // import ProductDetailPage from './pages/ProductDetailPage';
+import ProductsPage from './pages/ProductsPage';
+import ProductDetailPage from './pages/ProductDetailsPage';
 // // import CartPage from './pages/CartPage';
 // // import CheckoutPage from './pages/CheckoutPage';
 // // import OrderSuccessPage from './pages/OrderSuccessPage';
@@ -31,16 +31,16 @@ function App() {
         <Routes>
           {/* Public Pages */}
           <Route path="/" element={<HomePage />} />
-          {/* <Route path="/about" element={<AboutPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/terms" element={<TermsPage />} />
-          <Route path="/privacy" element={<PrivacyPolicyPage />} /> */}
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
           
           {/* Product Pages */}
-          {/* <Route path="/products" element={<ProductsPage />} />
-          <Route path="/products/:productId" element={<ProductDetailPage />} /> */}
-          
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:productId" element={<ProductDetailPage />} />
+
           {/* Authentication Pages */}
           {/* <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
