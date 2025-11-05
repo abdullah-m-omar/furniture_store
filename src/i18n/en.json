@@ -1,0 +1,61 @@
+{
+  "brand": "FurnitureStore",
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "login": "Login",
+    "about": "About",
+    "contact": "Contact",
+    "faq": "FAQ"
+  },
+  "search": {
+    "placeholder": "Search furniture...",
+    "aria": "Search",
+    "button": "Search"
+  },
+  "account": {
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "orders": "Orders"
+  },
+  "common": { "language": "Language", "en": "English", "ar": "Arabic" },
+  "product": { "viewDetails": "View Details", "addToCart": "Add to Cart" },
+    "home": {
+    "hero": {
+      "aria": "Featured promotions",
+      "1": { "title": "Modern comfort for every room", "sub": "Handpicked sofas, tables, and storage." },
+      "2": { "title": "Crafted to last", "sub": "Solid wood pieces with timeless design." },
+      "3": { "title": "Make it yours", "sub": "From minimal to classic—find your style." }
+    },
+    "about": {
+      "title": "About our company",
+      "text": "We design and curate quality furniture with honest materials and fair pricing. Our mission is to make beautiful homes accessible.",
+      "cta": "Learn more"
+    },
+    "categories": {
+      "title": "Shop by category",
+      "items": {
+        "living": "Living Room",
+        "bedroom": "Bedroom",
+        "dining": "Dining",
+        "office": "Office"
+      }
+    },
+    "products": {
+      "title": "Latest products",
+      "viewAll": "View all"
+    },
+    "testimonials": {
+      "title": "What customers say",
+      "items": {
+        "1": { "name": "Sarah A.", "text": "Great quality and fast delivery. My living room feels new!" },
+        "2": { "name": "Mohammed K.", "text": "Sturdy dining table, easy assembly, looks premium." },
+        "3": { "name": "Lina R.", "text": "Loved the minimalist bed frame—comfortable and elegant." }
+      }
+    }
+  }
+}
+

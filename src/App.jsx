@@ -1,35 +1,140 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from 'react-router-dom';
+// Import Layout Components
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+
+// // Import Page Components
+import HomePage from './pages/HomePage';
+// // import AboutPage from './pages/AboutPage';
+// // import ContactPage from './pages/ContactPage';
+// // import FaqPage from './pages/FaqPage';
+// // import TermsPage from './pages/TermsPage';
+// // import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+// // import LoginPage from './pages/LoginPage';
+// // import RegisterPage from './pages/RegisterPage';
+// // import ForgotPasswordPage from './pages/ForgotPasswordPage';
+// // import ProductsPage from './pages/ProductsPage';
+// // import ProductDetailPage from './pages/ProductDetailPage';
+// // import CartPage from './pages/CartPage';
+// // import CheckoutPage from './pages/CheckoutPage';
+// // import OrderSuccessPage from './pages/OrderSuccessPage';
+// // import DashboardPage from './pages/DashboardPage';
+// // import ProfilePage from './pages/ProfilePage';
+// // import OrderHistoryPage from './pages/OrderHistoryPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div className='container text-center mt-5'>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <main className="flex-grow-1">
+        <Routes>
+          {/* Public Pages */}
+          <Route path="/" element={<HomePage />} />
+          {/* <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/faq" element={<FaqPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} /> */}
+          
+          {/* Product Pages */}
+          {/* <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:productId" element={<ProductDetailPage />} /> */}
+          
+          {/* Authentication Pages */}
+          {/* <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} /> */}
+          
+          {/* Cart & Checkout */}
+          {/* <Route path="/cart" element={<CartPage />} /> */}
+          {/* NOTE: Checkout and Order Success will later be protected routes */}
+          {/* <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/order-success" element={<OrderSuccessPage />} /> */}
+
+          {/* Protected User Account Pages */}
+          {/* These will require the user to be logged in */}
+          {/* <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/account/profile" element={<ProfilePage />} />
+          <Route path="/account/orders" element={<OrderHistoryPage />} /> */}
+
+          {/* Catch-all 404 Not Found Page */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
+// // -------------------------------------------------------------------
+// // CREATE THE FOLLOWING PLACEHOLDER PAGE FILES
+// // Create a new folder `src/pages` and add these files inside it.
+// // This will prevent your app from crashing because of missing components.
+// // -------------------------------------------------------------------
+
+// // // src/pages/AboutPage.jsx
+// // const AboutPage = () => <div><h1>About Us</h1></div>;
+// // export default AboutPage;
+
+// // // src/pages/ContactPage.jsx
+// // const ContactPage = () => <div><h1>Contact Us</h1></div>;
+// // export default ContactPage;
+
+// // // src/pages/FaqPage.jsx
+// // const FaqPage = () => <div><h1>FAQ</h1></div>;
+// // export default FaqPage;
+
+// // // src/pages/TermsPage.jsx
+// // const TermsPage = () => <div><h1>Terms & Conditions</h1></div>;
+// // export default TermsPage;
+
+// // // src/pages/PrivacyPolicyPage.jsx
+// // const PrivacyPolicyPage = () => <div><h1>Privacy Policy</h1></div>;
+// // export default PrivacyPolicyPage;
+
+// // // src/pages/LoginPage.jsx
+// // const LoginPage = () => <div><h1>Login Page</h1></div>;
+// // export default LoginPage;
+
+// // // src/pages/RegisterPage.jsx
+// // const RegisterPage = () => <div><h1>Register Page</h1></div>;
+// // export default RegisterPage;
+
+// // // src/pages/ForgotPasswordPage.jsx
+// // const ForgotPasswordPage = () => <div><h1>Forgot Password</h1></div>;
+// // export default ForgotPasswordPage;
+
+// // // src/pages/ProductsPage.jsx
+// // const ProductsPage = () => <div><h1>Products Page</h1></div>;
+// // export default ProductsPage;
+
+// // // src/pages/ProductDetailPage.jsx
+// // const ProductDetailPage = () => <div><h1>Product Detail Page</h1></div>;
+// // export default ProductDetailPage;
+
+// // // src/pages/CartPage.jsx
+// // const CartPage = () => <div><h1>Shopping Cart</h1></div>;
+// // export default CartPage;
+
+// // // src/pages/CheckoutPage.jsx
+// // const CheckoutPage = () => <div><h1>Checkout Page</h1></div>;
+// // export default CheckoutPage;
+
+// // // src/pages/OrderSuccessPage.jsx
+// // const OrderSuccessPage = () => <div><h1>Order Success!</h1></div>;
+// // export default OrderSuccessPage;
+
+// // // src/pages/DashboardPage.jsx
+// // const DashboardPage = () => <div><h1>User Dashboard</h1></div>;
+// // export default DashboardPage;
+
+// // // src/pages/ProfilePage.jsx
+// // const ProfilePage = () => <div><h1>User Profile</h1></div>;
+// // export default ProfilePage;
+
+// // // src/pages/OrderHistoryPage.jsx
+// // const OrderHistoryPage = () => <div><h1>Order History</h1></div>;
+// // export default OrderHistoryPage;
