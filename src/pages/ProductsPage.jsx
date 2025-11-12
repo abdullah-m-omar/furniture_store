@@ -1,70 +1,99 @@
-import { useMemo, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+// src/pages/ProductsPage.jsx
+import { useEffect, useMemo, useState } from 'react'
+import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
+import { useSearchParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard/ProductCard'
 import ProductFilters from '../components/ProductFilters/ProductFilters'
-import { products } from '../data/products'
-import { categories as rawCategories } from '../data/Categories'
 import { useLocale } from '../context/LocaleContext'
+import { getCategories, getProducts } from '../services/productService'
 
 export default function ProductsPage() {
   const { t } = useTranslation()
-  const { dir } = useLocale()
+  const { dir, lang } = useLocale()
+  const [params, setParams] = useSearchParams()
 
-  // Localize category labels from i18n
-  const categories = useMemo(
-    () => rawCategories.map(c => ({ ...c, label: t(`categories.${c.key}`) })),
-    [t]
-  )
-  const catMap = useMemo(() => Object.fromEntries(categories.map(c => [c.key, c.label])), [categories])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [cats, setCats] = useState([])  // [{key,label}]
+  const [items, setItems] = useState([])
 
-  const [selectedCategory, setSelectedCategory] = useState('')
-  const [query, setQuery] = useState('')
-  const [sort, setSort] = useState('newest')
+  // URL-driven filters (so Home category links work)
+  const urlCategory = params.get('category') || ''
+  const urlSearch = params.get('search') || ''
+  const urlSort = params.get('sort') || 'newest'
 
-  const filtered = useMemo(() => {
-    let list = products.slice()
+  const [selectedCategory, setSelectedCategory] = useState(urlCategory)
+  const [query, setQuery] = useState(urlSearch)
+  const [sort, setSort] = useState(urlSort) // 'newest' | 'price-asc' | 'price-desc'
 
-    if (selectedCategory) list = list.filter(p => p.category === selectedCategory)
-    if (query.trim()) {
-      const q = query.toLowerCase()
-      list = list.filter(p => p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q))
-    }
+  // Keep URL in sync with UI
+  useEffect(() => {
+    const next = new URLSearchParams()
+    if (selectedCategory) next.set('category', selectedCategory)
+    if (query) next.set('search', query)
+    if (sort !== 'newest') next.set('sort', sort)
+    setParams(next, { replace: true })
+  }, [selectedCategory, query, sort, setParams])
 
-    if (sort === 'price-asc') list.sort((a, b) => a.price - b.price)
-    if (sort === 'price-desc') list.sort((a, b) => b.price - a.price)
-    // 'newest' → keep insertion order for now (you can add a 'createdAt' later)
+  // Fetch categories & products
+  useEffect(() => {
+    let alive = true
+    ;(async () => {
+      setLoading(true); setError('')
+      try {
+        const [c, p] = await Promise.all([
+          getCategories({ lang }),
+          getProducts({
+            lang,
+            categoryKey: selectedCategory || undefined,
+            search: query || undefined,
+            sort
+          })
+        ])
+        if (!alive) return
+        setCats(c)
+        setItems(p)
+      } catch (e) {
+        if (alive) setError(e.message || 'Failed to load products.')
+      } finally {
+        if (alive) setLoading(false)
+      }
+    })()
+    // re-run when filters or lang change
+  }, [lang, selectedCategory, query, sort])
 
-    return list
-  }, [selectedCategory, query, sort])
+  const catMap = useMemo(() => Object.fromEntries(cats.map(c => [c.key, c.label])), [cats])
 
   return (
     <Container className="py-4" dir={dir}>
       <h2 className="mb-3">{t('products.title')}</h2>
 
       <ProductFilters
-        categories={categories}
+        categories={cats}
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
         query={query}
         onQueryChange={setQuery}
-        sort={sort} onSortChange={setSort}
+        sort={sort}
+        onSortChange={setSort}
       />
 
-      {/* <SortBar sort={sort} onSortChange={setSort} /> */}
+      {loading && <div className="d-flex justify-content-center py-5"><Spinner animation="border" /></div>}
+      {error && <Alert variant="danger">{error}</Alert>}
 
-      <Row xs={1} sm={2} md={3} lg={4} className="g-3">
-        {filtered.map(p => (
-          <Col key={p.id}>
-            <ProductCard p={p} categoryLabel={catMap[p.category]} />
-          </Col>
-        ))}
-        {filtered.length === 0 && (
-          <Col>
-            <div className="text-muted">{t('products.noResults')}</div>
-          </Col>
-        )}
-      </Row>
+      {!loading && !error && (
+        <Row xs={1} sm={2} md={3} lg={4} className="g-3">
+          {items.map(p => (
+            <Col key={p.id}>
+              <ProductCard p={p} categoryLabel={p.categoryLabel || catMap[p.category]} />
+            </Col>
+          ))}
+          {items.length === 0 && (
+            <Col><div className="text-muted">{t('products.noResults')}</div></Col>
+          )}
+        </Row>
+      )}
     </Container>
   )
 }

@@ -10,9 +10,14 @@ import ContactPage from './pages/ContactPage';
 import FaqPage from './pages/FAQPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPolicyPage from './pages/PrivacyPage';
-// // import LoginPage from './pages/LoginPage';
-// // import RegisterPage from './pages/RegisterPage';
-// // import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import UpdatePasswordPage from './pages/UpdatePasswordPage';
+import AuthCallback from './pages/AuthCallback';
+import AccountProfilePage from './pages/AccountProfilePage';
+
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailsPage';
 // // import CartPage from './pages/CartPage';
@@ -36,10 +41,41 @@ function App() {
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/update-password" element={<UpdatePasswordPage />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
           
           {/* Product Pages */}
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:productId" element={<ProductDetailPage />} />
+
+          {/* protected routes */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <div className="container py-5">Dashboard placeholder</div>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/account/profile"
+            element={
+              <ProtectedRoute>
+                <AccountProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/account/orders"
+            element={
+              <ProtectedRoute>
+                <div className="container py-5">account orders</div>
+              </ProtectedRoute>
+            }
+          />
 
           {/* Authentication Pages */}
           {/* <Route path="/login" element={<LoginPage />} />

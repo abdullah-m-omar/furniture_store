@@ -4,4 +4,11 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+    optimizeDeps: {
+    // Help dep-scan prefer browser ESM
+    esbuildOptions: { conditions: ['browser', 'module'] }
+  },
+  resolve: {
+    conditions: ['module', 'browser']
+  }
 })

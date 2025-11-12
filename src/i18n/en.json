@@ -158,6 +158,41 @@
       "sharing": { "title": "Sharing", "text": "We do not sell your data. We may share with trusted providers (e.g., payment, delivery) strictly for service delivery." },
       "rights": { "title": "Your Rights", "text": "You can request access, correction, or deletion of your personal data where applicable." }
     }
+  },
+    "auth": {
+    "registerTitle": "Create an account",
+    "loginTitle": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "createAccount": "Create account",
+    "haveAccount": "Please check your inbox to verify your email",
+    "createAccountLink": "Create an account",
+    "signIn": "Sign in",
+    "forgotPassword": "Forgot password?",
+    "continueGoogle": "Continue with Google",
+    "verifyEmailNotice": "We sent you a verification link. Please check your inbox.",
+    "sendReset": "Send reset link",
+    "resetSent": "If an account exists for that email, a reset link was sent.",
+    "updatePasswordTitle": "Set a new password",
+    "newPassword": "New password",
+    "setNewPassword": "Set new password",
+    "passwordUpdated": "Password updated. Redirecting…",
+    "quantity": "Quantity",
+    "addToCart": "Add to Cart",
+    "signOut": "Sign out"
+  },
+    "profile": {
+    "title": "Profile",
+    "saved": "Profile updated.",
+    "emailChangeSent": "We sent a verification link to confirm your new email.",
+    "roleNote": "Only admins can change roles.",
+    "emailNote": "Changing your email will send a verification link.",
+    "changePw": "Change password",
+    "confirmPw": "Confirm password",
+    "updatePw": "Update password",
+    "pwMismatch": "Passwords do not match",
+    "pwUpdated": "Password updated."
   }
 }
 
