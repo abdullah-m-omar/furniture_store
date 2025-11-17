@@ -20,7 +20,7 @@ import AccountProfilePage from './pages/AccountProfilePage';
 
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailsPage';
-// // import CartPage from './pages/CartPage';
+import CartPage from './pages/CartPage';
 // // import CheckoutPage from './pages/CheckoutPage';
 // // import OrderSuccessPage from './pages/OrderSuccessPage';
 // // import DashboardPage from './pages/DashboardPage';
@@ -83,7 +83,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} /> */}
           
           {/* Cart & Checkout */}
-          {/* <Route path="/cart" element={<CartPage />} /> */}
+          <Route path="/cart" element={<CartPage />} />
           {/* NOTE: Checkout and Order Success will later be protected routes */}
           {/* <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/order-success" element={<OrderSuccessPage />} /> */}

@@ -7,23 +7,18 @@ import ProductGallery from '../components/ProductGallery/ProductGallery'
 import ProductInfo from '../components/ProductInfo/ProductInfo'
 import ProductTabs from '../components/ProductTabs/ProductTabs'
 import { supabase } from '../services/supabaseClient'
+import { toPublicUrl } from '../services/storageService'   
+import { useCart } from '../context/CartContext'          
+import { useToast } from '../context/ToastContext'         
 
 const IMAGE_FALLBACK = '/no-image.jpg'
-// TODO: replace with your real public bucket base when ready
-// e.g. 'https://<project-ref>.supabase.co/storage/v1/object/public/product-images/'
-const BUCKET_PUBLIC_BASE = '' 
-
-function toPublicUrl(url) {
-  if (!url) return IMAGE_FALLBACK
-  if (/^https?:\/\//i.test(url)) return url
-  if (BUCKET_PUBLIC_BASE) return `${BUCKET_PUBLIC_BASE}${url}`
-  return IMAGE_FALLBACK
-}
 
 export default function ProductDetailsPage() {
   const { productId } = useParams()
   const { t } = useTranslation()
   const { dir, lang } = useLocale()
+  const { addItem } = useCart()
+  const { show } = useToast()
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -53,9 +48,11 @@ export default function ProductDetailsPage() {
 
         const title = lang === 'ar' ? (data.title_ar || data.title_en) : (data.title_en || data.title_ar)
         const description = lang === 'ar' ? (data.description_ar || data.description_en) : (data.description_en || data.description_ar)
+
         const images = (data.product_images || [])
           .sort((a, b) => (a.position ?? 0) - (b.position ?? 0))
           .map(img => toPublicUrl(img.url))
+
         const categoryKey = data.categories?.key
         const categoryLabel = lang === 'ar'
           ? (data.categories?.name_ar || data.categories?.name_en || '')
@@ -85,6 +82,12 @@ export default function ProductDetailsPage() {
     load()
     return () => { cancelled = true }
   }, [productId, lang])
+
+  const handleAdd = () => {
+    if (!product) return
+    addItem({ id: product.id, title: product.title, price: product.price, image: product.image })
+    show(t('cart.added') || 'Product added to the cart', 'success')
+  }
 
   if (loading) {
     return (
@@ -117,15 +120,28 @@ export default function ProductDetailsPage() {
   return (
     <Container className="py-4" dir={dir}>
       <Row className="gy-4">
-        <Col md={6}><ProductGallery images={images} title={product.title} /></Col>
-        <Col md={6}><ProductInfo product={product} /></Col>
+        <Col md={6}>
+          <ProductGallery images={images} title={product.title} />
+        </Col>
+        <Col md={6}>
+          {/* If your ProductInfo has its own Add button, you can pass onAdd as a prop */}
+          <ProductInfo product={product} onAdd={handleAdd} />
+        </Col>
       </Row>
+
       <Row>
         <Col><ProductTabs product={product} /></Col>
       </Row>
+
       <div className="mt-4 d-flex gap-2">
-        <Button as={Link} to="/products" variant="outline-secondary">{t('product.back')}</Button>
-        <Button as={Link} to="/cart" variant="primary">{t('product.addToCart')}</Button>
+        <Button as={Link} to="/products" variant="outline-secondary">
+          {t('product.back')}
+        </Button>
+        <Button variant="primary" onClick={handleAdd}>
+          {t('product.addToCart')}
+        </Button>
+        {/* Optional: a "Go to cart" button */}
+        {/* <Button as={Link} to="/cart" variant="outline-primary">{t('cart.viewCart')}</Button> */}
       </div>
     </Container>
   )

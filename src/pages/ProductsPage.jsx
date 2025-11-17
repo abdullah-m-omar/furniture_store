@@ -1,4 +1,3 @@
-// src/pages/ProductsPage.jsx
 import { useEffect, useMemo, useState } from 'react'
 import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'

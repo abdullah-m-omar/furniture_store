@@ -7,13 +7,19 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './index.css';
 import LocaleProvider from './context/LocaleContext.jsx';
 import AuthProvider from './context/AuthContext.jsx';
+import { CartProvider } from './context/CartContext'
+import { ToastProvider } from './context/ToastContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <LocaleProvider>
         <AuthProvider>
-          <App />
+          <CartProvider>
+            <ToastProvider>
+              <App />
+            </ToastProvider>
+          </CartProvider>
         </AuthProvider>
       </LocaleProvider>
     </BrowserRouter>

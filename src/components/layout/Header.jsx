@@ -6,12 +6,14 @@ import { useTranslation } from 'react-i18next'
 import { useLocale } from '../../context/LocaleContext'
 import { useAuth } from '../../context/AuthContext'
 import { supabase } from '../../services/supabaseClient'
+import { useCart } from '../../context/CartContext'
 
 /**
  * Optional: pass cartCount from CartContext
  * <Header cartCount={cart.items.length} />
  */
 const Header = ({ cartCount = 0 }) => {
+  const { count } = useCart()
   const [expanded, setExpanded] = useState(false)
   const [query, setQuery] = useState('')
   const [profile, setProfile] = useState({ name: '', avatar_url: '', role: 'customer' })
@@ -142,13 +144,13 @@ const Header = ({ cartCount = 0 }) => {
             {/* Cart */}
             <Nav.Link as={Link} to="/cart" className="position-relative me-3" onClick={() => setExpanded(false)}>
               <FaShoppingCart className="fs-5" title={t('nav.cart')} />
-              {cartCount > 0 && (
+              {count > 0 && (
                 <Badge
                   bg="danger"
                   className="position-absolute top-0 start-100 translate-middle rounded-pill"
                   style={{ fontSize: '0.7rem' }}
                 >
-                  {cartCount}
+                  {count}
                 </Badge>
               )}
             </Nav.Link>

@@ -1,9 +1,10 @@
-// src/components/Home/ProductListSection.jsx
 import { useEffect, useState } from 'react'
 import { Container, Row, Col, Card, Button, Spinner, Alert } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useLocale } from '../../context/LocaleContext'
+import { useCart } from '../../context/CartContext'
+import { useToast } from '../../context/ToastContext'
 import { getProducts } from '../../services/productService'
 
 function fmtCurrency(amount, locale = 'en-US', currency = 'USD') {
@@ -11,6 +12,15 @@ function fmtCurrency(amount, locale = 'en-US', currency = 'USD') {
 }
 
 function ProductCardMini({ p, locale, viewLabel }) {
+  const { t } = useTranslation()
+  const { addItem } = useCart()
+  const { show } = useToast()
+
+  const onAdd = () => {
+    addItem({ id: p.id, title: p.title, price: p.price, image: p.image })
+    show('Product added to the cart', 'success')
+  }
+
   return (
     <Card className="h-100 shadow-sm">
       <Card.Img variant="top" src={p.image} alt={p.title} style={{ objectFit: 'cover', height: 220 }} />
@@ -23,7 +33,7 @@ function ProductCardMini({ p, locale, viewLabel }) {
           <Button as={Link} to={`/products/${p.id}`} variant="outline-primary" className="w-100">
             {viewLabel}
           </Button>
-          <Button variant="primary" className="w-100">Add</Button>
+          <Button variant="primary" className="w-100" onClick={onAdd}>{t('add.cart')}</Button>
         </div>
       </Card.Body>
     </Card>
@@ -33,6 +43,7 @@ function ProductCardMini({ p, locale, viewLabel }) {
 export default function ProductListSection() {
   const { t } = useTranslation()
   const { locale, lang } = useLocale()
+
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [items, setItems] = useState([])
