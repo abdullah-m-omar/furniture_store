@@ -1,6 +1,8 @@
 import { Table, Image, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useCart } from '../../context/CartContext'
+import { useEffect, useState } from 'react'
+import { supabase } from '../../services/supabaseClient'
 
 function fmt(amount, currency = 'USD', locale = 'en-US') {
   try { return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount) }
@@ -8,7 +10,7 @@ function fmt(amount, currency = 'USD', locale = 'en-US') {
 }
 
 export default function CartTable({ locale = 'en-US', currency = 'USD' }) {
-  const { items, inc, dec, remove, subtotal, clear } = useCart()
+  const { items, inc, dec, remove, subtotal } = useCart()
 
   if (items.length === 0) {
     return (
@@ -58,9 +60,22 @@ export default function CartTable({ locale = 'en-US', currency = 'USD' }) {
       </Table>
 
       <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3">
-        <Button variant="outline-danger" onClick={clear}>Clear cart</Button>
         <div className="fs-5">Total: <strong>{fmt(subtotal, currency, locale)}</strong></div>
+        {/* <Button as={Link} to="/checkout" variant="primary">Checkout (COD)</Button> */}
+        <CheckoutButton />
       </div>
     </>
   )
+}
+
+function CheckoutButton() {
+  const [user, setUser] = useState(null)
+  useEffect(() => {
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      setUser(user)
+    })()
+  }, [])
+  const to = user ? '/checkout' : '/login?next=/checkout'
+  return <Button as={Link} to={to} variant="primary">Checkout (COD)</Button>
 }

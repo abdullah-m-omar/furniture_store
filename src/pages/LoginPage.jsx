@@ -3,12 +3,13 @@ import { Container, Row, Col, Form, Button, Card, Alert } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { useLocale } from '../context/LocaleContext'
 import { supabase } from '../services/supabaseClient'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
   const { t } = useTranslation()
   const { dir } = useLocale()
   const navigate = useNavigate()
+  const [params] = useSearchParams()
   const location = useLocation()
   const [form, setForm] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
@@ -21,8 +22,10 @@ export default function LoginPage() {
     try {
       const { error: err } = await supabase.auth.signInWithPassword({ ...form })
       if (err) throw err
-      const from = location.state?.from || '/dashboard'
-      navigate(from, { replace: true })
+      const next = params.get('next') || '/'
+      navigate(next, { replace: true })
+      // const from = location.state?.from || '/dashboard'
+      // navigate(from, { replace: true })
     } catch (e2) {
       const msg = e2.message?.includes('Invalid login')
         ? 'Invalid email or password'

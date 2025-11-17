@@ -21,11 +21,10 @@ import AccountProfilePage from './pages/AccountProfilePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailsPage';
 import CartPage from './pages/CartPage';
-// // import CheckoutPage from './pages/CheckoutPage';
-// // import OrderSuccessPage from './pages/OrderSuccessPage';
+import CheckoutPage from './pages/CheckoutPage';
+import OrderSuccessPage from './pages/OrderSuccessPage';
 // // import DashboardPage from './pages/DashboardPage';
-// // import ProfilePage from './pages/ProfilePage';
-// // import OrderHistoryPage from './pages/OrderHistoryPage';
+import OrderHistoryPage from './pages/OrderHistoryPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -72,7 +71,7 @@ function App() {
             path="/account/orders"
             element={
               <ProtectedRoute>
-                <div className="container py-5">account orders</div>
+                <OrderHistoryPage />
               </ProtectedRoute>
             }
           />
@@ -85,8 +84,8 @@ function App() {
           {/* Cart & Checkout */}
           <Route path="/cart" element={<CartPage />} />
           {/* NOTE: Checkout and Order Success will later be protected routes */}
-          {/* <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/order-success" element={<OrderSuccessPage />} /> */}
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/order-success" element={<OrderSuccessPage />} />
 
           {/* Protected User Account Pages */}
           {/* These will require the user to be logged in */}
